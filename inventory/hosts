@@ -1,0 +1,41 @@
+# ansible inventory for OpenShift Container Platform  3.11.16
+
+[OSEv3:children]
+lb
+masters
+etcd
+nodes
+nfs
+
+[lb]
+loadbalancer1.GUID.INTERNAL
+
+[masters]
+master1.GUID.INTERNAL
+master2.GUID.INTERNAL
+master3.GUID.INTERNAL
+
+[etcd]
+master1.GUID.INTERNAL
+master2.GUID.INTERNAL
+master3.GUID.INTERNAL
+
+[nodes]
+## These are the masters
+master1.GUID.INTERNAL openshift_node_group_name='node-config-master' openshift_node_problem_detector_install=true
+master2.GUID.INTERNAL openshift_node_group_name='node-config-master' openshift_node_problem_detector_install=true
+master3.GUID.INTERNAL openshift_node_group_name='node-config-master' openshift_node_problem_detector_install=true
+
+## These are infranodes
+infranode1.GUID.INTERNAL openshift_node_group_name='node-config-infra' openshift_node_problem_detector_install=true
+infranode2.GUID.INTERNAL openshift_node_group_name='node-config-infra' openshift_node_problem_detector_install=true
+
+## These are regular nodes
+node1.GUID.INTERNAL openshift_node_group_name='node-config-compute-alpha' openshift_node_problem_detector_install=true
+node2.GUID.INTERNAL openshift_node_group_name='node-config-compute-beta' openshift_node_problem_detector_install=true
+node3.GUID.INTERNAL openshift_node_group_name='node-config-compute-common' openshift_node_problem_detector_install=true
+node4.GUID.INTERNAL openshift_node_group_name='node-config-compute-common' openshift_node_problem_detector_install=true
+
+[nfs]
+support1.GUID.INTERNAL
+
